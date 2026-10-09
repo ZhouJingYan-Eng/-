@@ -1,0 +1,154 @@
+/* ============================================
+   ESP32 数字人系统 全局样式
+   暗色 + 数字面板风格
+   ============================================ */
+
+QWidget {
+    background-color: #0d1015;
+    color: #dcdcdc;
+    font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
+QMainWindow {
+    background-color: #0a0c10;
+}
+
+QFrame {
+    background-color: #0d1015;
+    border: 1px solid #1a2030;
+}
+
+QLabel {
+    color: #cccccc;
+}
+
+QGroupBox {
+    color: #aaaaaa;
+    background-color: #11151c;
+    border: 1px solid #1f2630;
+    border-radius: 4px;
+    margin-top: 12px;
+    padding-top: 8px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    color: #00d4ff;
+}
+
+QPushButton {
+    background-color: #182030;
+    color: #dcdcdc;
+    border: 1px solid #2a3a4a;
+    padding: 6px 12px;
+    border-radius: 3px;
+}
+
+QPushButton:hover {
+    background-color: #2a3a50;
+    color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+QPushButton:pressed {
+    background-color: #0a1520;
+}
+
+QPushButton:disabled {
+    color: #555;
+    background-color: #15191e;
+}
+
+QCheckBox {
+    color: #cccccc;
+    spacing: 6px;
+}
+
+QCheckBox::indicator {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #2a3a4a;
+    background-color: #15191e;
+    border-radius: 2px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #00aaff;
+    border-color: #00d4ff;
+}
+
+QStatusBar {
+    background-color: #15191e;
+    color: #aaaaaa;
+    border-top: 1px solid #1a2030;
+}
+
+QStatusBar QLabel {
+    color: #aaaaaa;
+    padding: 0 6px;
+}
+
+QSplitter::handle {
+    background-color: #1a2030;
+}
+
+QSplitter::handle:hover {
+    background-color: #2a3a4a;
+}
+
+QScrollBar:vertical {
+    background-color: #15191e;
+    width: 10px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #2a3a4a;
+    border-radius: 4px;
+    min-height: 30px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #3a5a6a;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar:horizontal {
+    background-color: #15191e;
+    height: 10px;
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #2a3a4a;
+    border-radius: 4px;
+    min-width: 30px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #3a5a6a;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+
+QToolTip {
+    background-color: #1a2030;
+    color: #00d4ff;
+    border: 1px solid #00aaff;
+    padding: 4px 8px;
+}
+
+QMessageBox {
+    background-color: #15191e;
+}
+
+QMessageBox QLabel {
+    color: #dcdcdc;
+}

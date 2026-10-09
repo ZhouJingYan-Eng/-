@@ -1,0 +1,45 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# ===== 虚拟环境 =====
+venv/
+.venv/
+env/
+ENV/
+.python-version
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ===== 运行时 =====
+logs/
+*.log
+cache/
+*.tmp
+*.bak
+
+# ===== 软著打包 =====
+build_exe/
+*.spec
+
+# ===== 资源（按需取消注释）=====
+# resources/live2d/
+# resources/icons/
+
+# ===== 配置文件 =====
+.env
+config/local.yaml

@@ -1,0 +1,123 @@
+# ==========================================
+# 数字人上位机系统配置文件
+# ==========================================
+
+# MQTT 通信配置
+mqtt:
+  broker: "127.0.0.1"          # MQTT 服务器地址（本机部署 Mosquitto）
+  port: 1883                   # MQTT 端口
+  client_id: "digital_human_pc"  # 上位机客户端 ID
+  username: ""                  # 用户名（无鉴权留空）
+  password: ""                  # 密码（无鉴权留空）
+  keepalive: 60                 # 心跳秒数
+  # 主题定义
+  topics:
+    image_upload: "esp32/cam/image"       # 硬件图像上传主题
+    ptz_status: "esp32/ptz/status"       # 硬件回传当前角度
+    ptz_control: "esp32/ptz/control"     # 上位机下发云台控制
+    heartbeat: "esp32/heartbeat"         # 硬件心跳
+
+# 视频流配置
+video:
+  fps: 25                       # 期望帧率
+  jpeg_quality: 60              # JPEG 解码质量
+  buffer_size: 5                 # 帧缓冲大小
+  timeout_ms: 500                # 帧超时阈值
+
+# 人脸姿态识别配置
+face_pose:
+  model: "mediapipe"            # 识别后端 mediapipe / opencv
+  min_detection_confidence: 0.6
+  min_tracking_confidence: 0.5
+  # 姿态估计参数
+  focal_length: 600             # 焦距（像素，估算用）
+  max_face_distance: 1.2         # 多人场景锁定最近人脸阈值（米）
+
+# 云台控制配置
+ptz:
+  # 自动追踪
+  auto:
+    pid_x:
+      kp: 0.12
+      ki: 0.01
+      kd: 0.04
+    pid_y:
+      kp: 0.12
+      ki: 0.01
+      kd: 0.04
+    dead_zone: 0.015              # 死区，避免无意义小幅抖动
+    max_step: 5.0                 # 单帧最大调整角度
+    target_x: 0.0                 # 目标角度（中心）
+    target_y: 0.0
+  # 物理限位
+  limit:
+    x_min: -90.0
+    x_max: 90.0
+    y_min: -45.0
+    y_max: 45.0
+  # 防抖
+  anti_shake:
+    enabled: true
+    smoothing: 0.65                # 平滑系数（越大越平滑）
+    jitter_threshold: 0.6         # 抖动阈值
+    history_size: 5               # 历史窗口
+
+# Live2D 数字人配置
+digital_human:
+  model_path: "resources/live2d/Hiyori/Hiyori.model3.json"  # 模型路径
+  # 头部姿态映射系数（真人姿态 -> 数字人参数）
+  head_pose:
+    angle_x_scale: 30.0           # 水平转头系数
+    angle_y_scale: 30.0           # 俯仰系数
+    angle_z_scale: 30.0           # 倾斜系数
+    smoothing: 0.5
+  # 待机动作
+  idle:
+    breath_cycle: 6.0              # 呼吸周期（秒）
+    blink_interval_min: 2.0       # 眨眼最小间隔
+    blink_interval_max: 5.0
+  # 唇形同步
+  lip_sync:
+    enabled: true
+    smoothing: 0.35
+    gain: 1.5
+
+# 百度语音 API 配置
+voice:
+  asr:
+    app_id: ""
+    api_key: ""
+    secret_key: ""
+    sample_rate: 16000
+    dev_pid: 1537                  # 普通话
+  tts:
+    app_id: ""
+    api_key: ""
+    secret_key: ""
+    per: 4                         # 发音人（0=女，1=男，3=情感男，4=情感女）
+    spd: 5                        # 语速
+    pit: 5                        # 音调
+    vol: 9                        # 音量
+  # 录音参数
+  record:
+    chunk: 1024
+    channels: 1
+    rate: 16000
+    format_width: 2
+    silence_threshold: 500        # VAD 静音阈值
+    silence_duration: 1.5         # 静音判定时长（秒）
+    max_record_duration: 10       # 最大录音时长（秒）
+  # 智能问答（百度 UNIT 或自定义 API）
+  qa:
+    enabled: true
+    api_url: ""                   # 自定义问答接口 URL
+    api_key: ""
+    fallback: "您好，我暂时无法回答这个问题，请稍后重试。"
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "logs/digital_human.log"
+  rotation: "10 MB"
+  retention: "30 days"
+  console: true
